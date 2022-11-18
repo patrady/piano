@@ -6,21 +6,21 @@ import { MidiNoteOn } from "../MidiNoteOn";
 describe("MidiMessage", () => {
   describe(".decode", () => {
     it("decodes the array into type, channel, byte1, and byte2", () => {
-      expect(MidiMessage.decode([144, 39, 45])).toEqual({
+      expect(MidiMessage.decode(new Uint8Array([144, 39, 45]))).toEqual({
         type: 144,
         channel: 0,
         byte1: 39,
         byte2: 45,
       });
 
-      expect(MidiMessage.decode([145, 39, 45])).toEqual({
+      expect(MidiMessage.decode(new Uint8Array([145, 39, 45]))).toEqual({
         type: 144,
         channel: 1,
         byte1: 39,
         byte2: 45,
       });
 
-      expect(MidiMessage.decode([176, 64, 127])).toEqual({
+      expect(MidiMessage.decode(new Uint8Array([176, 64, 127]))).toEqual({
         type: 176,
         channel: 0,
         byte1: 64,

@@ -1,5 +1,9 @@
+import { Note } from "@patrady/chord-js";
+
 export class MidiNoteOn {
   static type = 144; // 1001 000
+
+  public note: Note;
 
   static matches(type: number) {
     return MidiNoteOn.type === type;
@@ -16,12 +20,19 @@ export class MidiNoteOn {
   }
 
   constructor(
-    public pitch: number,
+    pitch: number,
     public velocity: number,
     public timestamp = new Date()
-  ) {}
+  ) {
+    this.note = Note.fromMidi(pitch);
+  }
 
   toString() {
-    return `NOTE_ON ${this.timestamp.getTime()} ${this.pitch} ${this.velocity}`;
+    return [
+      "NOTE_ON",
+      this.timestamp.getTime(),
+      this.note.getMidiValue(),
+      this.velocity,
+    ].join(" ");
   }
 }

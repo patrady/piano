@@ -15,7 +15,7 @@ export abstract class MidiMessage {
     }
   }
 
-  static decode(data: [number, number, number]) {
+  static decode(data: Uint8Array) {
     const [status, byte1, byte2] = data;
     const type = status & 0xf0;
     const channel = status & 0x0f;
